@@ -1,0 +1,56 @@
+###
+### REST Client requests for Clywell.Core.Cqrs.Sample
+### 
+### Usage:
+###   1. dotnet run --project samples/Clywell.Core.Cqrs.Sample
+###   2. Open this file in VS Code
+###   3. Click "Send Request" on the "Create Item — Valid Request"
+###   4. The @itemId variable will be automatically captured
+###   5. Click "Send Request" on "Get Item — Valid ID" to retrieve it
+###
+
+@baseUrl = http://localhost:5000
+@contentType = application/json
+
+### Create Item — Valid Request
+POST {{baseUrl}}/api/items
+Content-Type: {{contentType}}
+
+{
+  "name": "Widget",
+  "description": "A useful widget for the toolkit"
+}
+
+
+### Create Item — Invalid (Empty Name)
+POST {{baseUrl}}/api/items
+Content-Type: {{contentType}}
+
+{
+  "name": "",
+  "description": "This will fail validation"
+}
+
+### Create Item — Invalid (Name Too Long)
+POST {{baseUrl}}/api/items
+Content-Type: {{contentType}}
+
+{
+  "name": "This is a very long name that exceeds one hundred characters and will trigger the MaximumLength validation rule that limits the name to 100 characters total",
+  "description": "Valid description"
+}
+
+### Create Item — Invalid (Description Too Long)
+POST {{baseUrl}}/api/items
+Content-Type: {{contentType}}
+
+{
+  "name": "Valid Name",
+  "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. This text is way too long and will exceed 500 characters."
+}
+
+### Get Item — Valid ID (captured from Create response above)
+GET {{baseUrl}}/api/items/160cb5ed-a615-4d7c-81ad-758ed08f0657
+
+### Get Item — Non-Existent
+GET {{baseUrl}}/api/items/00000000-0000-0000-0000-000000000000
