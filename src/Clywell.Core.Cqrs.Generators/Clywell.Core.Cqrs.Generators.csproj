@@ -1,0 +1,53 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <!-- Roslyn analyzers must target netstandard2.0 -->
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <LangVersion>latest</LangVersion>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>disable</ImplicitUsings>
+
+        <!-- Required for source generators -->
+        <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
+        <IsRoslynComponent>true</IsRoslynComponent>
+
+        <!-- Do not inherit global TreatWarningsAsErrors — CodeAnalysis symbols are noisy -->
+        <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+
+        <!-- Package Identity -->
+        <PackageId>Clywell.Core.Cqrs.Generators</PackageId>
+        <Description>Roslyn source generator for Clywell.Core.Cqrs — emits compile-time DI
+            registration for CQRS command/query handlers and invokers, replacing reflection-based
+            assembly scanning. Enables NativeAOT and trimmer compatibility.</Description>
+        <PackageTags>clywell;source-generator;roslyn;cqrs;command;query;di;aot</PackageTags>
+
+        <!-- URLs -->
+        <PackageProjectUrl>https://github.com/clywell/clywell-core</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/clywell/clywell-core</RepositoryUrl>
+
+        <!-- Generators have no runtime footprint -->
+        <DevelopmentDependency>true</DevelopmentDependency>
+        <IncludeBuildOutput>false</IncludeBuildOutput>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.CodeAnalysis.CSharp" PrivateAssets="all" />
+        <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" PrivateAssets="all" />
+    </ItemGroup>
+
+    <!-- Versioning -->
+    <ItemGroup>
+        <PackageReference Include="Nerdbank.GitVersioning">
+            <PrivateAssets>all</PrivateAssets>
+        </PackageReference>
+    </ItemGroup>
+
+    <!-- Bundle the generator DLL into the NuGet analyzers folder -->
+    <ItemGroup>
+        <None Include="$(OutputPath)\$(AssemblyName).dll"
+            Pack="true"
+            PackagePath="analyzers/dotnet/cs"
+            Visible="false" />
+    </ItemGroup>
+
+</Project>

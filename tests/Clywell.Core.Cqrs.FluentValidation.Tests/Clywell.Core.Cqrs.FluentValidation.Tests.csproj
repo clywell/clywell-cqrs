@@ -1,0 +1,42 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <ItemGroup>
+        <!-- Test Framework -->
+        <PackageReference Include="xunit" />
+        <PackageReference Include="xunit.runner.visualstudio">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <!-- Code Coverage -->
+        <PackageReference Include="coverlet.collector">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\src\Clywell.Core.Cqrs\Clywell.Core.Cqrs.csproj" />
+        <ProjectReference
+            Include="..\..\src\Clywell.Core.Cqrs.FluentValidation\Clywell.Core.Cqrs.FluentValidation.csproj" />
+        <!-- Source generator: referenced as analyzer so it emits handler registration at compile
+        time -->
+        <ProjectReference
+            Include="..\..\src\Clywell.Core.Cqrs.Generators\Clywell.Core.Cqrs.Generators.csproj"
+            OutputItemType="Analyzer"
+            ReferenceOutputAssembly="false" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <!-- Global usings for test files -->
+        <Using Include="Xunit" />
+    </ItemGroup>
+
+</Project>

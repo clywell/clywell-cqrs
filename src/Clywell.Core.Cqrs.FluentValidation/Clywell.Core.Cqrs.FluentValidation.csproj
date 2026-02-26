@@ -1,0 +1,52 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <!-- Package Identity -->
+        <PackageId>Clywell.Core.Cqrs.FluentValidation</PackageId>
+        <Description>FluentValidation pipeline behavior for Clywell.Core.Cqrs. Provides automatic
+            validation of commands and queries via IValidator&lt;T&gt; implementations registered in
+            the
+            DI container. Throws FluentValidation.ValidationException when validation fails.</Description>
+        <PackageTags>clywell;cqrs;fluentvalidation;validation;pipeline;clean-architecture</PackageTags>
+
+        <!-- URLs -->
+        <PackageProjectUrl>https://github.com/clywell/clywell-cqrs</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/clywell/clywell-cqrs</RepositoryUrl>
+
+        <!-- Include README in package -->
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+
+        <!-- Disabled StyleCop rules -->
+        <NoWarn>$(NoWarn);SA1101;SA1200;SA1309;SA1633;SA1210;SA1204;SA1413;SA1618</NoWarn>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Include="../../README.md" Pack="true" PackagePath="\" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Clywell.Core.Cqrs\Clywell.Core.Cqrs.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="FluentValidation" />
+        <PackageReference Include="FluentValidation.DependencyInjectionExtensions" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
+    </ItemGroup>
+
+    <!-- Versioning -->
+    <ItemGroup>
+        <PackageReference Include="Nerdbank.GitVersioning">
+            <PrivateAssets>all</PrivateAssets>
+        </PackageReference>
+    </ItemGroup>
+
+    <!-- Source Link (enables step-into debugging for NuGet consumers) -->
+    <ItemGroup>
+        <PackageReference Include="Microsoft.SourceLink.GitHub">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+    </ItemGroup>
+
+</Project>

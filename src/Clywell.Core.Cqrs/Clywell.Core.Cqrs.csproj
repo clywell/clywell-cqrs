@@ -1,0 +1,51 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <!-- Package Identity -->
+    <PackageId>Clywell.Core.Cqrs</PackageId>
+    <Description>Lightweight CQRS framework for the Clywell platform. Provides command/query
+      interfaces, a DI-resolved dispatcher, and a composable pipeline behavior system — no MediatR
+      or third-party mediator required.</Description>
+    <PackageTags>clywell;cqrs;mediator;command;query;pipeline;clean-architecture</PackageTags>
+
+    <!-- URLs -->
+    <PackageProjectUrl>https://github.com/clywell/clywell-cqrs</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/clywell/clywell-cqrs</RepositoryUrl>
+
+    <!-- Include README in package -->
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+
+    <!-- Disabled StyleCop rules -->
+    <NoWarn>$(NoWarn);SA1101;SA1200;SA1309;SA1633;SA1210;SA1204;SA1413;SA1618</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="../../README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+  <!-- Clywell Packages -->
+  <ItemGroup>
+  </ItemGroup>
+
+  <!-- CQRS / Validation -->
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
+  </ItemGroup>
+
+  <!-- Versioning -->
+  <ItemGroup>
+    <PackageReference Include="Nerdbank.GitVersioning">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <!-- Source Link (enables step-into debugging for NuGet consumers) -->
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+</Project>
