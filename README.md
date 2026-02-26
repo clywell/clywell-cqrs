@@ -1,7 +1,6 @@
 # Clywell.Core.Cqrs
 
 <!-- Badges -->
-[![Build Status](https://github.com/clywell/clywell-cqrs/workflows/CI/badge.svg)](https://github.com/clywell/clywell-cqrs/actions)
 [![NuGet Version](https://img.shields.io/nuget/v/Clywell.Core.Cqrs.svg)](https://www.nuget.org/packages/Clywell.Core.Cqrs/)
 [![License](https://img.shields.io/github/license/clywell/clywell-cqrs.svg)](LICENSE)
 
