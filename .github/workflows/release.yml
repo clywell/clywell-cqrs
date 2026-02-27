@@ -53,7 +53,7 @@ jobs:
             --logger "console;verbosity=minimal"
 
   # ============================================================
-  # Package — Clywell.Core.Cqrs, Generators, and FluentValidation
+  # Package — Clywell.Core.Cqrs (includes generator) and FluentValidation
   # ============================================================
   package:
     runs-on: ubuntu-latest
@@ -84,17 +84,6 @@ jobs:
             -o ./artifacts \
             src/Clywell.Core.Cqrs/Clywell.Core.Cqrs.csproj
           echo "✓ Clywell.Core.Cqrs packed"
-
-      - name: Pack Clywell.Core.Cqrs.Generators
-        run: |
-          dotnet pack \
-            -c ${{ env.BUILD_CONFIGURATION }} \
-            --no-restore \
-            -p:Version=${{ needs.validate-build.outputs.version }} \
-            -p:PackageVersion=${{ needs.validate-build.outputs.version }} \
-            -o ./artifacts \
-            src/Clywell.Core.Cqrs.Generators/Clywell.Core.Cqrs.Generators.csproj
-          echo "✓ Clywell.Core.Cqrs.Generators packed"
 
       - name: Pack Clywell.Core.Cqrs.FluentValidation
         run: |
@@ -180,8 +169,7 @@ jobs:
             ## Clywell.Core.Cqrs v${{ needs.validate-build.outputs.version }}
 
             ### Release Artifacts
-            - `Clywell.Core.Cqrs.${{ needs.validate-build.outputs.version }}.nupkg` — Core abstractions & dispatcher
-            - `Clywell.Core.Cqrs.Generators.${{ needs.validate-build.outputs.version }}.nupkg` — Roslyn source generator (compile-time DI registration, zero reflection)
+            - `Clywell.Core.Cqrs.${{ needs.validate-build.outputs.version }}.nupkg` — Core abstractions, dispatcher & bundled source generator
             - `Clywell.Core.Cqrs.FluentValidation.${{ needs.validate-build.outputs.version }}.nupkg` — Opt-in FluentValidation pipeline behavior
 
             ### What's Changed
@@ -189,14 +177,9 @@ jobs:
 
             ### Installation
 
-            **Core CQRS abstractions & dispatcher:**
+            **Core CQRS abstractions, dispatcher & source generator:**
             ```
             dotnet add package Clywell.Core.Cqrs --version ${{ needs.validate-build.outputs.version }}
-            ```
-
-            **Source generator — compile-time handler registration (recommended):**
-            ```
-            dotnet add package Clywell.Core.Cqrs.Generators --version ${{ needs.validate-build.outputs.version }}
             ```
 
             **FluentValidation pipeline integration (optional):**

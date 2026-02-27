@@ -1,15 +1,15 @@
 # Clywell.Core.Cqrs
 
 <!-- Badges -->
-[![NuGet Version](https://img.shields.io/nuget/v/Clywell.Core.Cqrs.svg)](https://www.nuget.org/packages/Clywell.Core.Cqrs/)
+[![Clywell.Core.Cqrs](https://img.shields.io/nuget/v/Clywell.Core.Cqrs.svg?label=Clywell.Core.Cqrs)](https://www.nuget.org/packages/Clywell.Core.Cqrs/)
+[![Clywell.Core.Cqrs.FluentValidation](https://img.shields.io/nuget/v/Clywell.Core.Cqrs.FluentValidation.svg?label=Clywell.Core.Cqrs.FluentValidation)](https://www.nuget.org/packages/Clywell.Core.Cqrs.FluentValidation/)
 [![License](https://img.shields.io/github/license/clywell/clywell-cqrs.svg)](LICENSE)
 
 ## Packages
 
 | Package | Description |
 |---------|-------------|
-| `Clywell.Core.Cqrs` | Core interfaces, dispatcher, and pipeline infrastructure |
-| `Clywell.Core.Cqrs.Generators` | Roslyn source generator — emits compile-time DI handler registration (zero reflection) |
+| `Clywell.Core.Cqrs` | Core interfaces, dispatcher, pipeline infrastructure, and bundled source generator |
 | `Clywell.Core.Cqrs.FluentValidation` | FluentValidation pipeline behavior |
 
 ---
@@ -24,11 +24,10 @@ The dispatcher resolves handlers and behaviors entirely through the DI container
 
 ## Installation
 
-Install the core package plus the source generator (required for handler registration):
+Install the core package — the source generator is bundled inside it:
 
 ```bash
 dotnet add package Clywell.Core.Cqrs
-dotnet add package Clywell.Core.Cqrs.Generators
 ```
 
 Optionally add FluentValidation integration:
@@ -36,14 +35,6 @@ Optionally add FluentValidation integration:
 ```bash
 dotnet add package Clywell.Core.Cqrs.FluentValidation
 ```
-
-> **Generator project reference** — the Generators package must be referenced as an analyzer, not a runtime dependency. Add it manually in your `.csproj` if the NuGet tooling does not do this automatically:
->
-> ```xml
-> <PackageReference Include="Clywell.Core.Cqrs.Generators"
->                   OutputItemType="Analyzer"
->                   ReferenceOutputAssembly="false" />
-> ```
 
 ---
 
@@ -237,9 +228,9 @@ app.UseExceptionHandler(errorApp =>
 
 ---
 
-## Source Generator (`Clywell.Core.Cqrs.Generators`)
+## Source Generator
 
-The generator scans your compilation for concrete `ICommandHandler<,>` and `IQueryHandler<,>` implementations at **build time** and emits an `AddCqrsHandlers()` extension method. This replaces reflection-based assembly scanning and is compatible with NativeAOT and .NET trimming.
+`Clywell.Core.Cqrs` bundles a Roslyn source generator that scans your compilation for concrete `ICommandHandler<,>` and `IQueryHandler<,>` implementations at **build time** and emits an `AddCqrsHandlers()` extension method. This replaces reflection-based assembly scanning and is compatible with NativeAOT and .NET trimming. No separate package install is needed.
 
 Generated output example (abbreviated):
 
@@ -296,7 +287,9 @@ Request → LoggingBehavior → ValidationBehavior → Handler → Response
 | `RequestHandlerDelegate<TResult>` | Delegate | Represents the next step in the pipeline; invoke inside a behavior to continue |
 | `AddCqrs()` | Extension | Registers `IDispatcher` in the DI container |
 
-### `Clywell.Core.Cqrs.Generators`
+### `Clywell.Core.Cqrs.Generators` (bundled)
+
+The source generator is shipped inside `Clywell.Core.Cqrs` — no separate install required.
 
 | Type | Kind | Description |
 |------|------|-------------|

@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.1] - 2026-02-27
+
+### Changed
+
+#### `Clywell.Core.Cqrs`
+- Source generator (`CqrsHandlerRegistrationGenerator`) is no longer published as a separate `Clywell.Core.Cqrs.Generators` NuGet package — it is now bundled directly inside `Clywell.Core.Cqrs` and activated automatically; no separate package install or project reference required
+
+## [1.0.0] - 2026-02-27
+
 ### Added
 
 #### `Clywell.Core.Cqrs` — Core package
@@ -22,11 +31,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `RequestHandlerDelegate<TResult>` — Delegate representing the next step in the pipeline; invoke it inside a behavior to continue execution
 - `Dispatcher` — Default `IDispatcher` implementation; resolves handlers and executes behaviors in registration order
 - `AddCqrs()` — `IServiceCollection` extension method that registers the dispatcher; call `AddCqrsHandlers()` afterwards to register handlers
-
-#### `Clywell.Core.Cqrs.Generators` — Source generator package
-
-- `CqrsHandlerRegistrationGenerator` — Roslyn incremental source generator that emits a compile-time `AddCqrsHandlers()` extension method; scans for all `ICommandHandler<,>` and `IQueryHandler<,>` implementations in the target assembly and registers them with the DI container — zero reflection at runtime
-- Reference the generator package with `OutputItemType="Analyzer" ReferenceOutputAssembly="false"` to use it as an analyzer-only dependency
+- `Clywell.Core.Cqrs.Generators` — Roslyn incremental source generator published as a separate package; emits a compile-time `AddCqrsHandlers()` extension method; scans for all `ICommandHandler<,>` and `IQueryHandler<,>` implementations and registers them with the DI container — zero reflection at runtime
 
 #### `Clywell.Core.Cqrs.FluentValidation` — FluentValidation integration package
 
@@ -38,10 +43,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 #### `Clywell.Core.Cqrs.Sample` — Sample minimal API project
 
-- Demonstrates end-to-end usage of the core, generator, and FluentValidation packages together
+- Demonstrates end-to-end usage of the core and FluentValidation packages together
 - `CreateItemCommand` / `CreateItemCommandHandler` — creates a new in-memory item and returns the created `ItemDto`
 - `GetItemQuery` / `GetItemQueryHandler` — retrieves an item by ID or throws `KeyNotFoundException` if not found
-- `CreateItemCommandValidator` — FluentValidation rules: name required (max 100 chars), description optional (max 500 chars)
+- `CreateItemCommandValidator` — FluentValidation rules: name required (max 100 chars), description required (max 500 chars)
 - Global exception handler middleware mapping `FluentValidation.ValidationException` to Problem Details (RFC 7807) `400 Bad Request` responses
 - OpenAPI documentation with Scalar interactive UI at `/scalar/v1`
 - `sample.http` — REST client test file covering both valid requests and validation-error scenarios
+
+[Unreleased]: https://github.com/clywell/clywell-cqrs/compare/v1.0.1...HEAD
+[1.0.1]: https://github.com/clywell/clywell-cqrs/compare/v1.0.0...v1.0.1
+[1.0.0]: https://github.com/clywell/clywell-cqrs/releases/tag/v1.0.0
