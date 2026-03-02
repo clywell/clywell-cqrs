@@ -38,6 +38,6 @@
 
         <!-- Web / API -->
         <PackageVersion Include="Microsoft.AspNetCore.OpenApi" Version="10.0.3" />
-        <PackageVersion Include="Scalar.AspNetCore" Version="2.12.48" />
+        <PackageVersion Include="Scalar.AspNetCore" Version="2.12.50" />
     </ItemGroup>
 </Project>
