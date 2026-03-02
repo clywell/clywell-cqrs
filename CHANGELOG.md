@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-03-02
+
+### Added
+
+#### `Clywell.Core.Cqrs`
+- `ErrorHandlingBehavior<TRequest, TResult>` — abstract base class for error-handling pipeline behaviors; owns the try/catch plumbing and delegates exception processing to `HandleExceptionAsync`, giving subclasses full control over how exceptions are mapped, logged, or re-thrown
+  - Override `ShouldHandle(Exception)` to narrow interception to specific exception types (default: all except `OperationCanceledException`)
+  - Override `HandleExceptionAsync(TRequest, Exception, CancellationToken)` to map to a failure result, log, rethrow, or any combination
+- `AddCqrsBehavior<TBehavior>()` — `IServiceCollection` extension method for registering open-generic `IPipelineBehavior<,>` implementations; behaviors run in registration order (first registered = outermost in pipeline)
+
 ## [1.0.1] - 2026-02-27
 
 ### Changed
@@ -51,6 +61,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - OpenAPI documentation with Scalar interactive UI at `/scalar/v1`
 - `sample.http` — REST client test file covering both valid requests and validation-error scenarios
 
-[Unreleased]: https://github.com/clywell/clywell-cqrs/compare/v1.0.1...HEAD
+[Unreleased]: https://github.com/clywell/clywell-cqrs/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/clywell/clywell-cqrs/compare/v1.0.1...v1.1.0
 [1.0.1]: https://github.com/clywell/clywell-cqrs/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/clywell/clywell-cqrs/releases/tag/v1.0.0
