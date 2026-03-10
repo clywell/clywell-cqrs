@@ -66,7 +66,7 @@ static async Task<IResult> CreateItem(IDispatcher dispatcher, CreateItemRequest 
     return Results.Created($"/api/items/{result.Id}", result);
 }
 
-static async Task<IResult> GetItem(IDispatcher dispatcher, Guid id, CancellationToken ct)
+static async Task<IResult> GetItem(IDispatcher dispatcher, Guid id, ILogger<Program> logger, CancellationToken ct)
 {
     try
     {
@@ -74,8 +74,9 @@ static async Task<IResult> GetItem(IDispatcher dispatcher, Guid id, Cancellation
         var result = await dispatcher.QueryAsync(query, ct);
         return Results.Ok(result);
     }
-    catch (KeyNotFoundException)
+    catch (KeyNotFoundException ex)
     {
+        logger.LogWarning(ex, "Item not found: {id}", id);
         return Results.NotFound();
     }
 }

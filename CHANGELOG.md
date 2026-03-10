@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.1] - 2026-03-10
+
+### Fixed
+
+#### `Clywell.Core.Cqrs`
+- Source generator DLL (`Clywell.Core.Cqrs.Generators.dll`) is now correctly embedded under `analyzers/dotnet/cs/` in the published NuGet package — consumers no longer need a separate `ProjectReference` to the generator project; the `PackageReference` to `Clywell.Core.Cqrs` is sufficient (note: this corrects the incomplete bundling first claimed in `[1.0.1]`)
+- Removed unreachable `<None Pack="true">` item from `Clywell.Core.Cqrs.Generators.csproj` that was made dead by `IsPackable>false`
+
 ## [1.1.0] - 2026-03-02
 
 ### Added
@@ -61,7 +69,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - OpenAPI documentation with Scalar interactive UI at `/scalar/v1`
 - `sample.http` — REST client test file covering both valid requests and validation-error scenarios
 
-[Unreleased]: https://github.com/clywell/clywell-cqrs/compare/v1.1.0...HEAD
+[Unreleased]: https://github.com/clywell/clywell-cqrs/compare/v1.1.1...HEAD
+[1.1.1]: https://github.com/clywell/clywell-cqrs/compare/v1.1.0...v1.1.1
 [1.1.0]: https://github.com/clywell/clywell-cqrs/compare/v1.0.1...v1.1.0
 [1.0.1]: https://github.com/clywell/clywell-cqrs/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/clywell/clywell-cqrs/releases/tag/v1.0.0

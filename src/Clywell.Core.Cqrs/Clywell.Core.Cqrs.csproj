@@ -29,6 +29,10 @@
       Include="..\Clywell.Core.Cqrs.Generators\Clywell.Core.Cqrs.Generators.csproj"
       OutputItemType="Analyzer"
       ReferenceOutputAssembly="false" />
+    <None Include="..\Clywell.Core.Cqrs.Generators\bin\$(Configuration)\netstandard2.0\Clywell.Core.Cqrs.Generators.dll"
+      Pack="true"
+      PackagePath="analyzers/dotnet/cs"
+      Visible="false" />
   </ItemGroup>
 
   <!-- CQRS / Validation -->

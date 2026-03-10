@@ -45,12 +45,4 @@
         </PackageReference>
     </ItemGroup>
 
-    <!-- Bundle the generator DLL into the NuGet analyzers folder -->
-    <ItemGroup>
-        <None Include="$(OutputPath)\$(AssemblyName).dll"
-            Pack="true"
-            PackagePath="analyzers/dotnet/cs"
-            Visible="false" />
-    </ItemGroup>
-
 </Project>
